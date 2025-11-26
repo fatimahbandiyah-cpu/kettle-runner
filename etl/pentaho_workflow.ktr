@@ -6,6 +6,7 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,10 +428,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2025/11/26 08:53:54.535</created_date>
+    <created_date>2025/11/22 05:13:56.012</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2025/11/26 08:53:54.535</modified_date>
-    <key_for_session_key/>
+    <modified_date>2025/11/22 05:13:56.012</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -438,22 +439,17 @@
   <order>
     <hop>
       <from>CSV file input</from>
-      <to>Filter rows</to>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Filter rows</from>
-      <to>Sort rows</to>
+      <from>Select values</from>
+      <to>Sample rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows</from>
-      <to>Unique rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique rows</from>
-      <to>Microsoft Excel output</to>
+      <from>Sample rows</from>
+      <to>JSON output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -468,7 +464,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/Users/jds/Desktop/pentaho upload/csv_to_json/bank_transactions_data_edited.csv</filename>
+    <filename>../etl/bank_transactions_data_edited.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -480,7 +476,7 @@
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
-    <format>mixed</format>
+    <format>Unix</format>
     <encoding/>
     <fields>
       <field>
@@ -512,7 +508,7 @@
         <currency>IDR</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>6</length>
         <precision>2</precision>
         <trim_type>none</trim_type>
       </field>
@@ -545,7 +541,7 @@
         <currency>IDR</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>14</length>
+        <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -669,14 +665,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>256</yloc>
+      <xloc>544</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
+    <name>JSON output</name>
+    <type>JsonOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -685,188 +681,89 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to/>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>TransactionID</leftvalue>
-            <function>IS NOT NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>AccountID</leftvalue>
-            <function>IS NOT NULL</function>
-            <rightvalue/>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>528</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
+    <outputValue>outputValue</outputValue>
+    <jsonBloc>data</jsonBloc>
+    <nrRowsInBloc>1</nrRowsInBloc>
+    <operation_type>outputvalue</operation_type>
+    <compatibility_mode>N</compatibility_mode>
+    <encoding>UTF-8</encoding>
+    <addtoresult>N</addtoresult>
+    <file>
+      <name/>
+      <extention>js</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      <servlet_output>N</servlet_output>
+    </file>
     <fields>
       <field>
         <name>TransactionID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>TransactionID</element>
       </field>
       <field>
         <name>AccountID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>AccountID</element>
       </field>
       <field>
         <name>TransactionAmount</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>TransactionAmount</element>
       </field>
       <field>
         <name>TransactionDate</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>TransactionDate</element>
       </field>
       <field>
         <name>TransactionType</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>TransactionType</element>
       </field>
       <field>
         <name>Location</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>Location</element>
       </field>
       <field>
         <name>DeviceID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>DeviceID</element>
       </field>
       <field>
         <name>IP Address</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>IP Address</element>
       </field>
       <field>
         <name>MerchantID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>MerchantID</element>
       </field>
       <field>
         <name>Channel</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>Channel</element>
       </field>
       <field>
         <name>CustomerAge</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>CustomerAge</element>
       </field>
       <field>
         <name>CustomerOccupation</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>CustomerOccupation</element>
       </field>
       <field>
         <name>TransactionDuration</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>TransactionDuration</element>
       </field>
       <field>
         <name>LoginAttempts</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>LoginAttempts</element>
       </field>
       <field>
         <name>AccountBalance</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>AccountBalance</element>
       </field>
       <field>
         <name>PreviousTransactionDate</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
+        <element>PreviousTransactionDate</element>
       </field>
     </fields>
     <attributes/>
@@ -878,14 +775,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>256</yloc>
+      <xloc>912</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
+    <name>Select values</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -894,15 +791,344 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
     <fields>
       <field>
         <name>TransactionID</name>
-        <case_insensitive>N</case_insensitive>
+        <rename/>
       </field>
+      <field>
+        <name>AccountID</name>
+        <rename/>
+      </field>
+      <field>
+        <name>TransactionAmount</name>
+        <rename/>
+      </field>
+      <field>
+        <name>TransactionDate</name>
+        <rename/>
+      </field>
+      <field>
+        <name>TransactionType</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Location</name>
+        <rename/>
+      </field>
+      <field>
+        <name>DeviceID</name>
+        <rename/>
+      </field>
+      <field>
+        <name>IP Address</name>
+        <rename/>
+      </field>
+      <field>
+        <name>MerchantID</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Channel</name>
+        <rename/>
+      </field>
+      <field>
+        <name>CustomerAge</name>
+        <rename/>
+      </field>
+      <field>
+        <name>CustomerOccupation</name>
+        <rename/>
+      </field>
+      <field>
+        <name>TransactionDuration</name>
+        <rename/>
+      </field>
+      <field>
+        <name>LoginAttempts</name>
+        <rename/>
+      </field>
+      <field>
+        <name>AccountBalance</name>
+        <rename/>
+      </field>
+      <field>
+        <name>PreviousTransactionDate</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>TransactionID</name>
+        <rename>TransactionID</rename>
+        <type>None</type>
+        <length>8</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>AccountID</name>
+        <rename>AccountID</rename>
+        <type>None</type>
+        <length>7</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>TransactionAmount</name>
+        <rename>TransactionAmount</rename>
+        <type>None</type>
+        <length>6</length>
+        <precision>2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>TransactionDate</name>
+        <rename>TransactionDate</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>TransactionType</name>
+        <rename>TransactionType</rename>
+        <type>None</type>
+        <length>6</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>Location</name>
+        <rename>Location</rename>
+        <type>None</type>
+        <length>13</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>DeviceID</name>
+        <rename>DeviceID</rename>
+        <type>None</type>
+        <length>7</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>IP Address</name>
+        <rename>IP Address</rename>
+        <type>None</type>
+        <length>15</length>
+        <precision>3</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>MerchantID</name>
+        <rename>MerchantID</rename>
+        <type>None</type>
+        <length>4</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>Channel</name>
+        <rename>Channel</rename>
+        <type>None</type>
+        <length>6</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>CustomerAge</name>
+        <rename>CustomerAge</rename>
+        <type>None</type>
+        <length>4</length>
+        <precision>1</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>CustomerOccupation</name>
+        <rename>CustomerOccupation</rename>
+        <type>None</type>
+        <length>8</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>TransactionDuration</name>
+        <rename>TransactionDuration</rename>
+        <type>None</type>
+        <length>5</length>
+        <precision>1</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>LoginAttempts</name>
+        <rename>LoginAttempts</rename>
+        <type>None</type>
+        <length>3</length>
+        <precision>1</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>AccountBalance</name>
+        <rename>AccountBalance</rename>
+        <type>None</type>
+        <length>8</length>
+        <precision>2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>PreviousTransactionDate</name>
+        <rename>PreviousTransactionDate</rename>
+        <type>None</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -913,14 +1139,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>920</xloc>
-      <yloc>256</yloc>
+      <xloc>656</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Microsoft Excel output</name>
-    <type>ExcelOutput</type>
+    <name>Sample rows</name>
+    <type>SampleRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -929,54 +1155,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>${Internal.Entry.Current.Directory}/output</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
-    <fields>
-    </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
+    <linesrange>1..100</linesrange>
+    <linenumfield/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -986,8 +1166,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
-      <yloc>256</yloc>
+      <xloc>752</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
